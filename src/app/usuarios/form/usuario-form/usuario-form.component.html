@@ -1,0 +1,44 @@
+<form [formGroup]="controlForm" (ngSubmit)="saveData()" class="form-horizontal mat-form">
+  <div class="wrap-pasos">
+
+    <div class="inner-form input-data">
+      <div class="row">
+        <ng-container *ngFor="let key of keys" >
+          <div class="col-md-3">
+            <div class="inner-datos" [ngSwitch]="key">
+
+              <ng-template [ngSwitchCase]="'location_id'">
+
+
+                <mat-form-field>
+                  <mat-label>Ciudad</mat-label>
+                  <mat-select [formControlName]="key">
+                    <mat-option *ngFor="let city of cities" [value]="city.id">
+                      {{city.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+
+
+              </ng-template>
+
+              <ng-template ngSwitchDefault>
+                <mat-form-field >
+                  <input matInput type="text" class="mat-control"  [formControlName]="key" [placeholder]="key" >
+                </mat-form-field>
+              </ng-template>
+              <!-- <app-form-alerts [element]="controlForm.controls[field]"></app-form-alerts> -->
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+
+    <div class="btn-actions">
+      <button mat-raised-button color="accent" [disabled]="(controlForm.invalid || sendingData)">{{buttonText}}</button>
+    </div>
+
+  </div>
+</form>

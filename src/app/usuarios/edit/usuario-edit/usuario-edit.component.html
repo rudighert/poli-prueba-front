@@ -1,0 +1,7 @@
+<h3>Editar Usuario</h3>
+<ng-container *ngIf="!waiting">
+  <app-usuario-form
+    [user]="user"
+    [buttonText]="'Guardar Cambios'"
+  ></app-usuario-form>
+</ng-container>

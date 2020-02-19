@@ -1,0 +1,39 @@
+<div class="filter">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar Usuario">
+  </mat-form-field>
+</div>
+
+<div class="table-container" [ngStyle]="tableAreaStyle">
+  <table mat-table  class="full-width" #table [dataSource]="dataSource" matSortActive="email" matSortDisableClear matSortDirection="desc" matSort>
+
+    <ng-container *ngFor="let key of headerTable" matColumnDef="{{key}}">
+
+      <mat-header-cell *matHeaderCellDef mat-sort-header [class]="key">
+        {{key}}
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let element" [class]="key">
+
+        <ng-container [ngSwitch]="key">
+
+          <ng-template [ngSwitchCase]="'edit'">
+            <button mat-button color="primary" [routerLink]="['/usuarios','edit',element.id]">Editar</button>
+          </ng-template>
+
+          <ng-template ngSwitchDefault>
+            {{element[key]}}
+          </ng-template>
+        </ng-container>
+
+      </mat-cell>
+
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="headerTable"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: headerTable;"></mat-row>
+  </table>
+
+</div>
+
+
+<button mat-raised-button color="accent" routerLink="/usuarios/new">Agregar Usuario</button>
